@@ -7,134 +7,178 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f5f7fa;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            position: relative;
-        }
 
-        .container {
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
+        /* CSS Variables for Theme Control */
+    :root {
+        --primary-color: #3498db;
+        --primary-hover: #2980b9;
+        --border-color: #3498db;
+        --heading-color: #2c3e50;
+        --background-color: #f5f7fa;
+        --box-background: #ffffff;
+        --success-color: #27ae60;
+        --error-color: #e74c3c;
+        --text-muted: #7f8c8d;
+        --details-bg: #f8f9fa;
+        --loading-color: #3498db;
+    }
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: calc(22px + 1.2vw);
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-        }
+    /* Clown Theme Overrides */
+    .clown-theme {
+        --primary-color: #e74c3c;
+        --primary-hover: #c0392b;
+        --border-color: #e74c3c;
+        --heading-color: #c0392b;
+        --background-color: #ffebee;
+        --box-background: #fff5f5;
+        --success-color: #e74c3c;
+        --error-color: #c0392b;
+        --text-muted: #e74c3c;
+        --details-bg: #ffdddd;
+        --loading-color: #e74c3c;
+    }
 
-        .search-box {
-            width: 90%;
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 25px;
-        }
+    /* Apply Variables to All Elements */
+    body {
+        font-family: 'Cairo', sans-serif;
+        background-color: var(--background-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        position: relative;
+        transition: background-color 0.5s ease;
+    }
 
-        input {
-            padding: 14px;
-            margin: 15px 10px;
-            width: 90%;
-            max-width: 300px;
-            border-radius: 8px;
-            border: 2px solid #3498db;
-            font-family: 'Cairo', sans-serif;
-            font-size: 17px;
-            box-sizing: border-box;
-        }
+    .container {
+        max-width: 600px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
 
-        button {
-            padding: 14px 30px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 17px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    h1 {
+        color: var(--heading-color);
+        margin-bottom: 30px;
+        font-size: calc(22px + 1.2vw);
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 10px;
+        transition: color 0.5s ease, border-color 0.5s ease;
+    }
 
-        button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
+    .search-box {
+        width: 90%;
+        background-color: var(--box-background);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 25px;
+        transition: background-color 0.5s ease;
+    }
 
-        .result-container {
-            margin-top: 25px;
-            padding: 25px;
-            background-color: #ffffff;
-            border-radius: 15px;
-            min-height: 150px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 2px solid #3498db;
-        }
+    input {
+        padding: 14px;
+        margin: 15px 10px;
+        width: 90%;
+        max-width: 300px;
+        border-radius: 8px;
+        border: 2px solid var(--border-color);
+        font-family: 'Cairo', sans-serif;
+        font-size: 17px;
+        box-sizing: border-box;
+        transition: border-color 0.5s ease;
+    }
 
-        .success {
-            color: #27ae60;
-            font-size: 1.2em;
-            line-height: 1.6;
-            padding: 20px;
-        }
+    button {
+        padding: 14px 30px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Cairo', sans-serif;
+        font-size: 17px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .error {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 1.1em;
-            padding: 20px;
-        }
+    button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+    }
 
-        .loading {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.3em;
-            color: #3498db;
-            z-index: 100;
-        }
+    .result-container {
+        margin-top: 25px;
+        padding: 25px;
+        background-color: var(--box-background);
+        border-radius: 15px;
+        min-height: 150px;
+        width: 90%;
+        position: relative;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 2px solid var(--border-color);
+        transition: background-color 0.5s ease, border-color 0.5s ease;
+    }
 
-        .details-box {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: right;
-            line-height: 1.8;
-        }
+    .success {
+        color: var(--success-color);
+        font-size: 1.2em;
+        line-height: 1.6;
+        padding: 20px;
+        transition: color 0.5s ease;
+    }
 
-        .map-link {
-            display: inline-block;
-            margin: 15px 0;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white !important;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    .error {
+        color: var(--error-color);
+        font-weight: bold;
+        font-size: 1.1em;
+        padding: 20px;
+    }
 
-        .map-link:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
+    .loading {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.3em;
+        color: var(--loading-color);
+        z-index: 100;
+        transition: color 0.5s ease;
+    }
+
+    .details-box {
+        background-color: var(--details-bg);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px 0;
+        text-align: right;
+        line-height: 1.8;
+        transition: background-color 0.5s ease;
+    }
+
+    .map-link {
+        display: inline-block;
+        margin: 15px 0;
+        padding: 10px 20px;
+        background-color: var(--primary-color);
+        color: white !important;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .map-link:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+    }
+
+    /* Make sure text in details box maintains contrast */
+    .clown-theme .details-box {
+        color: #333;
 
         /* Card Flip Element - Hidden by default */
         #flip-card-container {
@@ -155,8 +199,8 @@
         }
         
         .card {
-            width: 200px;
-            height: 300px;
+            width: 180px;
+            height: 280px;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.8s;
@@ -790,13 +834,21 @@ font-family: 'Aref Ruqaa', serif;
             const sonicElement = document.getElementById('sonic-container');
             const flipCardElement = document.getElementById('flip-card-container');
             const flipCard = document.getElementById('flipCard');
+            const body = document.body;
 
-            // Hide special elements by default
+            // Reset theme and hide special elements by default
+            body.classList.remove('clown-theme');
             batmanElement.classList.remove('show');
             raccoonElement.classList.remove('show');
             sonicElement.classList.remove('show');
             flipCardElement.classList.remove('show');
             resultDiv.innerHTML = '';
+
+            // Clear any existing flip interval
+            if (window.flipInterval) {
+                clearInterval(window.flipInterval);
+                window.flipInterval = null;
+            }
 
             if (!phoneNumber) {
                 showError('الرجاء إدخال رقم الهاتف المسجل');
@@ -868,7 +920,7 @@ font-family: 'Aref Ruqaa', serif;
                                         📍 لوكيشن الاستوديو - أضغط للفتح في Google Maps 🗺️
                                     </a>
                                 </div>
-                                <p style="color: #7f8c8d; margin-top: 20px;">
+                                <p style="color: var(--text-muted); margin-top: 20px;">
                                      الرجاء الالتزام بالموعد
                                 </p>
                                 
@@ -908,10 +960,7 @@ font-family: 'Aref Ruqaa', serif;
                 }
                 if (isFlipCardNumber) {
                     flipCardElement.classList.add('show');
-                    // Clear any existing interval to prevent multiple intervals
-                    if (window.flipInterval) {
-                        clearInterval(window.flipInterval);
-                    }
+                    body.classList.add('clown-theme');
                     // Auto-flip every 2 seconds
                     window.flipInterval = setInterval(() => {
                         flipCard.classList.toggle('flip');
@@ -930,5 +979,7 @@ font-family: 'Aref Ruqaa', serif;
             if (e.key === 'Enter') findBooking();
         });
     </script>
+</body>
+</html>
 </body>
 </html>
