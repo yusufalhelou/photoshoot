@@ -424,6 +424,56 @@
           }
         }
 
+
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    :root {
+      --size: 4px;
+      --tick: 0.2s;
+
+      /* Sonic Colors */
+      --a: transparent;
+      --b: #000; /* black */
+      --c: #fff; /* white */
+      --d: #2228a2; /* dark blue */
+      --e: #2446c3; /* blue */
+      --f: #4349e3; /* light blue */
+      --g: #6465e4; /* lighter blue */
+      --h: #e6a287; /* skin */
+      --i: #a46145; /* dark skin */
+      --j: #424142; /* dark grey */
+      --k: #848284; /* grey */
+      --l: #a5a2a5; /* light grey */
+      --m: #e40b18; /* red */
+      --n: #820308; /* dark red */
+
+      /* Floor & Tube Colors */
+      --f1: #a5a2a5; /* grey */
+      --f2: #e6c22b; /* yellow */
+      --f3: #212021; /* dark-grey */
+      --f4: #424142; /* grey-pipe-1 */
+      --f5: #848284; /* grey-pipe-2 */
+      --f6: #a5a2a5; /* grey-pipe-3 */
+      --f7: #e7e3e7; /* grey-pipe-4 */
+      --f8: #0619c3; /* blue */
+
+      /* Tube Support Colors */
+      --s1: #e7e3e7; /* grey-1 */
+      --s2: #a29fa2; /* grey-2 */
+      --s3: #848284; /* grey-3 */
+      --s4: #424142; /* grey-4 */
+      --s5: #414041; /* grey-5 */
+      --s6: #212021; /* grey-6 */
+      --s7: #000000; /* black */
+      --s8: #2ec121; /* green */
+    }
+  `;
+  document.head.appendChild(style);
+});
+</script>
+        
         /* Sonic Element - Hidden by default */
         #sonic-container {
           position: fixed;
