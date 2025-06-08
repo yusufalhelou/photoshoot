@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تأكيد حجز السيشن</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -134,9 +135,87 @@
             background-color: #2980b9;
             transform: translateY(-2px);
         }
+
+        /* Card Flip Element - Hidden by default */
+        #flip-card-container {
+            position: fixed;
+            right: 50px;
+            bottom: -350px;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            perspective: 1000px;
+        }
+        
+        #flip-card-container.show {
+            bottom: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .card {
+            width: 200px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-back,
+        .card-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            backface-visibility: hidden;
+            user-select: none;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        .card-back {
+            background-color: purple;
+            border: double 4px black;
+            transform: rotateY(180deg);
+            color: white;
+            font-size: 1.5em;
+            line-height: 1.2;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .card-front {
+            background-color: white;
+            transform: rotateY(0deg);
+        }
+        
+        .card-emoji {
+            font-size: 8em;
+        }
+        
+        .card-text {
+            font-size: 1.5em;
+            padding: 10px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        
+        .flip {
+            transform: rotateY(180deg);
+        }
         
         /* Batman Element - Hidden by default */
-        #batman {
+        /* #batman {
           font-family: Arial, sans-serif;
           box-sizing: border-box;
           font-size: 55px;
@@ -157,7 +236,30 @@
           z-index: 1000;
           opacity: 0;
           pointer-events: none;
-        }
+        } */
+
+        #batman {
+font-family: 'Aref Ruqaa', serif;
+  box-sizing: border-box;
+          font-size: 55px;
+          color: #fff;
+          font-weight: bold;
+          background: #000;
+          display: block;
+          padding: 0px;
+          width: 170px;
+          word-wrap: break-word;
+          line-height: 90px;
+          text-align: center;
+          position: fixed;
+          right: 50px;
+          bottom: -200px;
+          cursor: pointer;
+          transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+          z-index: 1000;
+          opacity: 0;
+          pointer-events: none;
+}
         
         #batman:before {
           content: " ";
@@ -524,7 +626,7 @@
   position: absolute;
   height: 4px;
   width: 4px;
-  right: 20%;
+  right: 10%;
   margin: -4px;
   animation: move-1 0.2s infinite;
 }
@@ -596,6 +698,18 @@
         <div class="loading" id="loading">جاري البحث...</div>
     </div>
 
+     <!-- Hidden Flip Card Element -->
+    <div id="flip-card-container">
+        <div class="card" id="flipCard">
+            <div class="card-back">
+                <div class="card-text">علشان تبقى تلتزم بمعادك</div>
+            </div>
+            <div class="card-front">
+                <div class="card-emoji">🤡</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Hidden Sonic Element -->
 <div id="sonic-container" class="sonic-container">
   <div class="level-container">
@@ -605,7 +719,7 @@
       </div>
     </div>
     <div class="tube-container">
-      <div class="support-1"></div>
+      <!-- <div class="support-1"></div> -->
       <div class="support-2"></div>
       <div class="tube"></div>
     </div>
@@ -613,7 +727,8 @@
 </div>
     
     <!-- Hidden Batman Element -->
-    <div id="batman">. &nbsp; .<br/><br/>I AM THE BATMAN</div>
+    <!-- <div id="batman">. &nbsp; .<br/><br/>I AM THE BATMAN</div> -->
+    <div id="batman">. &nbsp; .<br/>أنا باتمان الحقيقي</div>
     
     <!-- Hidden Racoon Element -->
     <div id="raccoon-container" class="raccoon-container">
@@ -621,10 +736,10 @@
             <div class="body">
                 <div class="eye-bg"></div>
                 <div class="eye-bg eye-bg-right"></div>
-                <div class="eyes">
-                    <div class="eye"></div>
-                    <div class="eye eye-right"></div>
-                </div>
+               <div class="eyes">
+  <div class="eye eye-right"></div> <!-- Now LEFT eye winks -->
+  <div class="eye"></div> <!-- Now RIGHT eye is still -->
+</div>
             </div>
             <div class="ears">
                 <div class="ear"></div>
@@ -635,12 +750,12 @@
         </div>
     </div>
 
-    <script>
+   <script>
         let isFetching = false;
         const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vShri7DwdRNEHWyNfVtIk7CKJHQ-zfLCnVU1LQqf7P0k0rMMhaLD6cGslpWJWnaIDAzgHvqQOYv49HE/pubhtml';
         
-        // Special numbers
+        // Special numbers (keeping Batman and Raccoon as they were)
         const BATMAN_NUMBER = "01013357062";
         const RACCOON_NUMBER = "01030407887";
         const SONIC_NUMBER = "01228649258";
@@ -673,11 +788,14 @@
             const batmanElement = document.getElementById('batman');
             const raccoonElement = document.getElementById('raccoon-container');
             const sonicElement = document.getElementById('sonic-container');
+            const flipCardElement = document.getElementById('flip-card-container');
+            const flipCard = document.getElementById('flipCard');
 
             // Hide special elements by default
             batmanElement.classList.remove('show');
             raccoonElement.classList.remove('show');
             sonicElement.classList.remove('show');
+            flipCardElement.classList.remove('show');
             resultDiv.innerHTML = '';
 
             if (!phoneNumber) {
@@ -686,10 +804,11 @@
                 return;
             }
             
-            // Check if this is a special number
+            // Check if this is a special number (for Batman and Raccoon)
             const isBatmanNumber = phoneNumber === BATMAN_NUMBER;
             const isRaccoonNumber = phoneNumber === RACCOON_NUMBER;
             const isSonicNumber = phoneNumber === SONIC_NUMBER;
+            let isFlipCardNumber = false;
 
             try {
                 const doc = await fetchSheetData();
@@ -706,11 +825,14 @@
 
                 let phoneColumn = -1;
                 let dataColumn = -1;
+                let clownColumn = -1;
 
+                // Find column indexes
                 headerCells.forEach((cell, index) => {
                     const text = cell.textContent.trim();
                     if (text === 'Phone Number') phoneColumn = index;
                     if (text === 'Combined Data') dataColumn = index;
+                    if (text === 'Clown') clownColumn = index;
                 });
 
                 if (phoneColumn === -1 || dataColumn === -1) {
@@ -721,11 +843,18 @@
                 let found = false;
                 for (let i = 3; i < rows.length; i++) {
                     const cells = rows[i].querySelectorAll('td');
-                    if (cells.length > Math.max(phoneColumn, dataColumn)) {
+                    if (cells.length > Math.max(phoneColumn, dataColumn, clownColumn)) {
                         const currentPhone = cells[phoneColumn].textContent.trim();
                         
                         if (currentPhone === phoneNumber) {
                             const combinedData = cells[dataColumn].innerHTML;
+                            
+                            // Check if this row has clown emoji in the Clown column
+                            if (clownColumn !== -1 && cells.length > clownColumn) {
+                                const clownValue = cells[clownColumn].textContent.trim();
+                                isFlipCardNumber = clownValue.includes('🤡');
+                            }
+
                             resultDiv.innerHTML = `
                                 <div class="success">🎉 تم العثور على الحجز! 🎉</div>
                                 <div class="details-box">
@@ -767,7 +896,7 @@
                 console.error('Error:', error);
                 showError('حدث خطأ غير متوقع أثناء البحث');
             } finally {
-                // Show special elements if their numbers match
+                // Show special elements if their conditions match
                 if (isBatmanNumber) {
                     batmanElement.classList.add('show');
                 }
@@ -776,6 +905,17 @@
                 }
                 if (isSonicNumber) {
                     sonicElement.classList.add('show');
+                }
+                if (isFlipCardNumber) {
+                    flipCardElement.classList.add('show');
+                    // Clear any existing interval to prevent multiple intervals
+                    if (window.flipInterval) {
+                        clearInterval(window.flipInterval);
+                    }
+                    // Auto-flip every 2 seconds
+                    window.flipInterval = setInterval(() => {
+                        flipCard.classList.toggle('flip');
+                    }, 2000);
                 }
                 isFetching = false;
             }
