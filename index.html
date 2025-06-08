@@ -15,6 +15,7 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
+            position: relative;
         }
 
         .container {
@@ -133,6 +134,295 @@
             background-color: #2980b9;
             transform: translateY(-2px);
         }
+        
+        /* Batman Element - Hidden by default */
+        #batman {
+          font-family: Arial, sans-serif;
+          box-sizing: border-box;
+          font-size: 55px;
+          color: #fff;
+          font-weight: bold;
+          background: #000;
+          display: block;
+          padding: 10px;
+          width: 170px;
+          word-wrap: break-word;
+          line-height: 45px;
+          text-align: center;
+          position: fixed;
+          right: 50px;
+          bottom: -200px;
+          cursor: pointer;
+          transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+          z-index: 1000;
+          opacity: 0;
+          pointer-events: none;
+        }
+        
+        #batman:before {
+          content: " ";
+          background: transparent;
+          display: block;
+          position: absolute;
+          left: 0;
+          top: -50px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 50px 0 0 30px;
+          border-color: transparent transparent transparent #000000;
+        }
+        
+        #batman:after {
+          content: " ";
+          background: transparent;
+          display: block;
+          position: absolute;
+          right: 0;
+          top: -50px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 0 50px 30px;
+          border-color: transparent transparent #000000 transparent;
+        }
+        
+        #batman.show {
+          bottom: 0;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        
+        /* Racoon Element - Hidden by default */
+        #raccoon-container {
+          position: fixed;
+          right: 50px;
+          bottom: -200px;
+          z-index: 1000;
+          opacity: 0;
+          pointer-events: none;
+          transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+          width: 170px;
+          height: 150px;
+        }
+        
+        #raccoon-container.show {
+          bottom: 0;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        
+        .racoon {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .racoon .body {
+          width: 120%;
+          height: 95%;
+          border-radius: 0 0 50% 50%;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          overflow: hidden;
+          z-index: 1;
+        }
+        .racoon .body::after {
+          content: "";
+          background: #fff;
+          width: 100%;
+          height: 160%;
+          position: absolute;
+          left: 0%;
+          top: 40%;
+          border-radius: 50%;
+        }
+        .racoon .body::before {
+          content: "";
+          background: #959ca1;
+          width: 75%;
+          height: 120%;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 20%;
+          border-radius: 50%;
+        }
+        
+        .racoon .ears {
+          display: flex;
+          justify-content: space-between;
+          width: 80%;
+          margin: 0 auto;
+          position: relative;
+          top: 15%;
+        }
+        
+        .racoon .ear {
+          width: 50px;
+          height: 45px;
+          transform: skewX(30deg) rotate(30deg);
+          border-radius: 15px;
+          background: #959ca1;
+          position: relative;
+        }
+        .racoon .ear::after {
+          content: "";
+          width: 80%;
+          height: 80%;
+          position: absolute;
+          left: 15%;
+          top: 15%;
+          display: block;
+          background: #767779;
+          border-radius: 15px;
+        }
+        
+        .racoon .ear-right {
+          transform: skewX(-30deg) rotate(-30deg);
+        }
+        .racoon .ear-right::after {
+          left: auto;
+          right: 15%;
+        }
+        
+        .racoon .eye-bg {
+          background: #767779;
+          width: 50%;
+          height: 80%;
+          position: relative;
+          z-index: 1;
+          border-radius: 40% 100% 40% 100%;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%) skewX(20deg) rotate(20deg);
+          bottom: -40%;
+        }
+        
+        .racoon .eye-bg-right {
+          transform: translateX(-50%) skewX(-20deg) rotate(-20deg);
+          border-radius: 100% 40% 100% 40%;
+        }
+        
+        .racoon .eyes {
+          display: flex;
+          width: 38%;
+          top: 62%;
+          position: absolute;
+          z-index: 2;
+          left: 50%;
+          transform: translate(-50%);
+          justify-content: space-between;
+        }
+        
+        .racoon .eye {
+          width: 20px;
+          height: 20px;
+          background: #959ca1;
+          border-radius: 50%;
+          position: relative;
+          animation: eye 3s infinite;
+        }
+        .racoon .eye-right {
+          animation: eye2 3s infinite;
+        }
+        .racoon .eye::after {
+          content: "";
+          width: 70%;
+          height: 70%;
+          display: block;
+          position: absolute;
+          left: 15%;
+          top: 15%;
+          border-radius: 50%;
+          background: #000;
+        }
+        .racoon .eye:before {
+          content: "";
+          width: 20%;
+          height: 20%;
+          background: #fff;
+          position: absolute;
+          left: 30%;
+          top: 30%;
+          display: block;
+          z-index: 1;
+        }
+        
+        .racoon .nose {
+          width: 30px;
+          height: 30px;
+          background: #fff;
+          z-index: 2;
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          border-radius: 30% 35% 70% 35%;
+          transform: translateX(-50%) rotate(45deg);
+        }
+        
+        .racoon .nose-gray {
+          width: 14px;
+          height: 40px;
+          background: #959ca1;
+          display: block;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 19px;
+          border-radius: 100% 100% 10% 10%;
+          z-index: 2;
+        }
+        .racoon .nose-gray::after {
+          content: "";
+          background: #000;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%) rotate(45deg);
+          bottom: -8px;
+          width: 15px;
+          height: 15px;
+          border-radius: 10% 50% 100% 50%;
+        }
+        
+        @keyframes eye {
+          0% {
+            transform: translateX(0) rotate(0);
+          }
+          30% {
+            transform: translateX(5px) rotate(-15deg);
+          }
+          50% {
+            transform: translateX(5px) translateY(5px) rotate(-30deg);
+          }
+          70% {
+            transform: translateX(0px) translateY(0px) rotate(0deg);
+          }
+        }
+        @keyframes eye2 {
+          0% {
+            transform: translateX(0) rotate(0);
+          }
+          30% {
+            transform: translateX(5px) rotate(-15deg);
+          }
+          50% {
+            transform: translateX(5px) translateY(5px) rotate(-30deg);
+          }
+          70% {
+            transform: translateX(0px) translateY(0px) rotate(0deg) scaleY(1);
+          }
+          80% {
+            transform: translateX(0px) translateY(0px) rotate(0deg) scaleY(0.1);
+          }
+          90% {
+            transform: translateX(0px) translateY(0px) rotate(0deg) scaleY(1);
+          }
+        }
     </style>
 </head>
 <body>
@@ -146,10 +436,37 @@
         <div class="loading" id="loading">جاري البحث...</div>
     </div>
 
+    <!-- Hidden Batman Element -->
+    <div id="batman">. &nbsp; .<br/><br/>I AM THE BATMAN</div>
+    
+    <!-- Hidden Racoon Element -->
+    <div id="raccoon-container" class="raccoon-container">
+        <div class="racoon">
+            <div class="body">
+                <div class="eye-bg"></div>
+                <div class="eye-bg eye-bg-right"></div>
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye eye-right"></div>
+                </div>
+            </div>
+            <div class="ears">
+                <div class="ear"></div>
+                <div class="ear ear-right"></div>
+            </div>
+            <div class="nose"></div>
+            <div class="nose-gray"></div>
+        </div>
+    </div>
+
     <script>
         let isFetching = false;
         const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vShri7DwdRNEHWyNfVtIk7CKJHQ-zfLCnVU1LQqf7P0k0rMMhaLD6cGslpWJWnaIDAzgHvqQOYv49HE/pubhtml';
+        
+        // Special numbers
+        const BATMAN_NUMBER = "01013357062";
+        const RACCOON_NUMBER = "01030407887";
 
         async function fetchSheetData() {
             const loading = document.getElementById('loading');
@@ -176,6 +493,12 @@
 
             const phoneNumber = document.getElementById('phoneInput').value.trim();
             const resultDiv = document.getElementById('result');
+            const batmanElement = document.getElementById('batman');
+            const raccoonElement = document.getElementById('raccoon-container');
+            
+            // Hide special elements by default
+            batmanElement.classList.remove('show');
+            raccoonElement.classList.remove('show');
             resultDiv.innerHTML = '';
 
             if (!phoneNumber) {
@@ -183,6 +506,10 @@
                 isFetching = false;
                 return;
             }
+            
+            // Check if this is a special number
+            const isBatmanNumber = phoneNumber === BATMAN_NUMBER;
+            const isRaccoonNumber = phoneNumber === RACCOON_NUMBER;
 
             try {
                 const doc = await fetchSheetData();
@@ -260,6 +587,14 @@
                 console.error('Error:', error);
                 showError('حدث خطأ غير متوقع أثناء البحث');
             } finally {
+                // Show special elements if their numbers match
+                if (isBatmanNumber) {
+                    batmanElement.classList.add('show');
+                }
+                if (isRaccoonNumber) {
+                    raccoonElement.classList.add('show');
+                }
+                
                 isFetching = false;
             }
         }
